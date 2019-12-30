@@ -11,6 +11,17 @@ const getCities = async () => {
         return { status: 404, message: error.originalError.info.message };
     }
 }
+const vehicle = async (data) => {
+    const pool = await sql.getConnection();
+    try {
+        let result  = await pool.getConnection()
+            .input('cityID', mssql.Int,data.cityID)
+            .execute('SP_vehicles')
+            return result;
+    } catch (error) {
+        return { status: 404, message: error.originalError.info.message };
+    }
+}
 const travel = async (data) => {
     const pool = await sql.getConnection();
     try {
@@ -39,4 +50,5 @@ module.exports = {
     getCities,
     travel,
     getPastJourneys,
+    vehicle,
 }

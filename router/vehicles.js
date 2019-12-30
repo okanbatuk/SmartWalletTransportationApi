@@ -12,6 +12,11 @@ router.get('/city', async (req,res) => {
     }
 })
 
+router.post('/vehicles', async(req,res) => {
+    const vehicle = await vehicleTransactions.vehicle(req.body);
+    res.json(vehicle.recordsets[0]);
+})
+
 router.post('/travel', async(req,res) => {
     const travel = await vehicleTransactions.travel(req.body);
     if(travel.recordset[0].Status != 0 ) {
