@@ -13,9 +13,10 @@ const getCities = async () => {
 }
 const vehicle = async (data) => {
     const pool = await sql.getConnection();
+    
     try {
-        let result  = await pool.getConnection()
-            .input('cityID', mssql.Int,data.cityID)
+        let result  = await pool.request()
+            .input('cityID', mssql.Int, data.cityID)
             .execute('SP_vehicles')
             return result;
     } catch (error) {
